@@ -1,11 +1,11 @@
 <template>
   	<div class="shufa">
-  			<ul
+  			<!--<ul
 			  v-infinite-scroll="loadMore"
 			  infinite-scroll-disabled="loading"
 			  infinite-scroll-distance="10">
 			  	<li v-for="item in list">{{ item }}</li>
-			</ul>
+			</ul>-->
 			<p @click="toast">toast</p>
 			<p @click="MessageBox">MessageBox</p>
 			<p @click="aa">22</p>
@@ -15,11 +15,22 @@
 			>
 				<h1>兜兜</h1>
 			</mt-popup>
+			<mt-swipe :auto="4000" class="aa" @change="handleChange">
+				<mt-swipe-item class="sp">
+					<div>111111111</div>
+				</mt-swipe-item>
+				<mt-swipe-item class="sp">
+					<div>22222222222222</div>
+				</mt-swipe-item>
+				<mt-swipe-item class="sp">
+					<div>33333333333333</div>
+				</mt-swipe-item>
+			</mt-swipe>
   	</div>
 </template>
 
 <script>
-	import { Toast,MessageBox, Popup } from 'mint-ui';
+	import { Toast,MessageBox, Popup, Swipe, SwipeItem } from 'mint-ui';
 	
   export default {
     data() {
@@ -28,9 +39,10 @@
         popupVisible:false
       }
     },
-//  components:{
-//  	Popup
-//  },
+    components:{
+    	'mt-swipe':Swipe,
+    	'mt-swipe-item':SwipeItem
+    },
     methods:{
     	loadMore() {
 		  this.loading = true;
@@ -53,7 +65,13 @@
 		},
 		aa(){
 			this.popupVisible=true;
+		},
+		handleChange(index){
+			console.log(index);
 		}
     }
   }
 </script>
+<style scoped>
+	.aa,.sp{height: 100px;}
+</style>
