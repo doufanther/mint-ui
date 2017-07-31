@@ -26,6 +26,14 @@
 					<div>33333333333333</div>
 				</mt-swipe-item>
 			</mt-swipe>
+			<mt-range v-model="rangeValue"></mt-range>
+			<mt-progress :value="20" :bar-height="5"></mt-progress>
+			<button @click="uploading">上传文件</button>
+			<mt-progress :value="val" v-show="val">
+				<div slot="start"></div>
+				<div slot="end">{{val}}</div>
+			</mt-progress>
+			<mt-picker :slots="slots" @change="onValuesChange"></mt-picker>
   	</div>
 </template>
 
@@ -36,13 +44,29 @@
     data() {
       return {
         list:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
-        popupVisible:false
+        popupVisible:false,
+        rangeValue:30,
+        val:0,
+        slots: [
+        {
+          flex: 1,
+          values: ['2015-01', '2015-02', '2015-03', '2015-04', '2015-05', '2015-06'],
+          className: 'slot1',
+          textAlign: 'right'
+        }, {
+          divider: true,
+          content: '-',
+          className: 'slot2'
+        }, {
+          flex: 1,
+          values: ['2015-01', '2015-02', '2015-03', '2015-04', '2015-05', '2015-06'],
+          className: 'slot3',
+          textAlign: 'left'
+        }
+      ]
       }
     },
-    components:{
-    	'mt-swipe':Swipe,
-    	'mt-swipe-item':SwipeItem
-    },
+   
     methods:{
     	loadMore() {
 		  this.loading = true;
@@ -67,8 +91,27 @@
 			this.popupVisible=true;
 		},
 		handleChange(index){
-			console.log(index);
-		}
+			//console.log(index);
+		},
+		uploading(){
+			let aa=setInterval(()=>{
+				this.val++;
+				if(this.val===101){
+					clearInterval(aa);
+					this.val=0;
+					Toast({
+					  message: '操作成功',
+					  iconClass: 'icon icon-success'
+					});
+				}
+			},30)
+		},
+		onValuesChange(picker, values) {
+	      if (values[0] > values[1]) {
+	        picker.setSlotValue(1, values[0]);
+	        console.log(picker)
+	      }
+	    }
     }
   }
 </script>
