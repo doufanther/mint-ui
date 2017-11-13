@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-		<shufa></shufa>
+		<keep-alive>
+			<router-view></router-view>
+		</keep-alive>
 	</div>
 </template>
 
 <script>
 	
-	import shufa from './components/shufa.vue'
+	
 	
 	export default {
 	  name: 'app',
 	 	components:{
-	  	'shufa':shufa
+	  	
 		},
 	  methods:{
 	  

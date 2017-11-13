@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "china-area-data": "^3.0.0",
     "mint-ui": "^2.2.7",
     "vue": "^2.3.3",
